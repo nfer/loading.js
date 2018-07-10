@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>带有loading效果的H5页面</title>
+    <style>
+        .loading-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(31,31,31);
+            z-index: 1000;
+        }
+        
+        .loading-box .loading-text {
+            position: absolute;
+            font-size: 20px;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            color: white;
+            text-align: center;
+        }
+        
+        .image {
+            display: inline-block;
+            width: 30%;
+        }
+        </style>
+</head>
+<body>
+    <div class="loading-box">
+        <div class="loading-text">
+            <span class="percent">0%</span>
+            <span>loading...</span>
+        </div>
+    </div>
+    <div class="wrapper">
+        <img class="image" data-src="./assets/img-1.jpeg"/>
+        <img class="image" data-src="./assets/img-2.jpeg"/>
+        <img class="image" data-src="./assets/img-3.jpeg"/>
+        <img class="image" data-src="./assets/img-4.jpeg"/>
+        <img class="image" data-src="./assets/img-5.jpeg"/>
+        <img class="image" data-src="./assets/img-6.jpeg"/>
+        <img class="image" data-src="./assets/img-7.jpeg"/>
+        <img class="image" data-src="./assets/img-8.jpeg"/>
+        <img class="image" data-src="./assets/img-9.jpeg"/>
+    </div>
+    
+    <script type="text/javascript" src="./jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        function loading(imgs, cb) {
+            const len = imgs.length;
+            let num = 0;
+            let numLoaded = 0;
+            const intv = setInterval(() => {
+                if (numLoaded >= len) {
+                    if (cb) {
+                        cb(100, true);
+                    }
+                    clearInterval(intv);
+                    return;
+                }
+
+                if (numLoaded <= num) {
+                    numLoaded += 1;
+                    const percent = Math.floor(numLoaded * 100 / len);
+                    if (cb) {
+                        cb(percent, false);
+                    }
+                }
+            }, 50);
+            imgs.forEach((item) => {
+                const img = new Image();
+                img.onload = () => {
+                    num += 1;
+                };
+                img.src = item;
+            });
+        }
+        const imgs = [
+            "./assets/img-1.jpeg",
+            "./assets/img-2.jpeg",
+            "./assets/img-3.jpeg",
+            "./assets/img-4.jpeg",
+            "./assets/img-5.jpeg",
+            "./assets/img-6.jpeg",
+            "./assets/img-7.jpeg",
+            "./assets/img-8.jpeg",
+            "./assets/img-9.jpeg",
+        ];
+        function loadingCallback(percent, done) {
+            if (done) {
+                $('.loading-box').delay(100).fadeOut(400);
+                $('img.image').each((index, item) => {
+                    $(item).attr('src', $(item).attr('data-src'))
+                })
+            }
+
+            $('.loading-box .percent').text(`${percent}%`);
+        }
+        loading(imgs, loadingCallback);
+    </script>
+</body>
+</html>
