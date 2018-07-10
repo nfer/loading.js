@@ -1,0 +1,17 @@
+{
+  "name": "loading.js",
+  "version": "0.0.1",
+  "description": "h5 images pre-load libary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "h5",
+    "loading",
+    "images",
+    "pre-load"
+  ],
+  "author": "",
+  "license": "MIT"
+}
