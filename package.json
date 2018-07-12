@@ -6,12 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfer/loading.js.git"
+  },
   "keywords": [
     "h5",
     "loading",
     "images",
     "pre-load"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": "Nfer Zhuang <nfer.zhuang@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nfer/loading.js/issues"
+  },
+  "homepage": "https://github.com/nfer/loading.js#readme"
 }
